@@ -16,11 +16,11 @@ Bước 3: Cài đặt gói phụ thuộc
 
 ```pip install -r requirements.txt```
 
-Bước 4:Chạy tool
+Bước 4: Chạy tool
 
 - Nếu chưa cài ossec agent, sử dụng tùy chọn **url**  để  tự động cài
 
-```./auto_ossec.bin <server_ip> url=https://bintray.com/artifact/download/ossec/ossec-hids/ossec-hids-2.8.3.tar.gz```
+```./auto_ossec.bin <server_ip> url=https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz```
 
 - Nếu server đã cài ossec agent 
 
