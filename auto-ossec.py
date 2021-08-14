@@ -252,7 +252,7 @@ def _installossec(serverip,version_name):
 	#install depence package
 	cmds="apt update && apt install gcc make libevent-dev zlib1g-dev libssl-dev libpcre2-dev wget tar -y"
 	os.system(cmds)
-    cwd = os.getcwd()
+    cwd= os.getcwd()
     os.chdir("/tmp/")
     subprocess.Popen("tar -zxvf ossec.tar.gz;rm ossec.tar.gz", shell=True).wait()
 
