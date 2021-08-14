@@ -11,8 +11,6 @@
 #  use auto-ossec. This also works with AlienVault pairing.
 #
 #  Written by: Dave Kennedy and the Binary Defense Systems (BDS) Team
-#  Twitter: @HackingDave, @Binary_Defense
-#  Website: https://www.binarydefense.com 
 #
 #  Usage: python auto_ossec.py  - this will show you the flag options to pair. Read the README.md for more
 #  information.
@@ -87,9 +85,6 @@ try:
 
 except IndexError:
     print ("""
-Binary Defense Systems (BDS) OSSEC Auto Enrollment
-https://www.binarydefense.com
-Written by: The BDS Crew: Dave Kennedy, Charles Yost, Jimmy Byrd, Jason Ashton, Eric Itangata
 
 In order for this to work, you need to point auto_ossec.exe to the OSSEC server that is listening. Note that default port is 9654 but this can be changed in the source.
 
@@ -97,11 +92,9 @@ Note that if you specify optional 0.0.0.0/0, this will place a star for the IP a
 
 Also note if you specify url=<site> at the end, this is for Linux only, it will automatically download and install OSSEC for you and configure it based on the server-ip. You do not need to do a 0.0.0.0/0 before
 
-Example: auto_ossec.exe/.bin 192.168.5.5 0.0.0.0/0 url=https://bintray.com/etc/etc/ossec-hids.tar.gz
-Example2: auto_ossec.bin 192.168.5.5 url=https://somewebsite.com/ossec-hids-2.8.3.tar.gz
-Usage: auto_ossec.exe <server_ip> <optional: 0.0.0.0/0> <optional: url>
+Usage: auto_ossec.py <server_ip> <optional: 0.0.0.0/0> <optional: url>
+Example: auto_ossec.py 192.168.5.5 0.0.0.0/0 url= https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
 
-Example URL: https://bintray.com/artifact/download/ossec/ossec-hids/ossec-hids-2.8.3.tar.gz
 
         """)
     sys.exit()
@@ -109,7 +102,7 @@ Example URL: https://bintray.com/artifact/download/ossec/ossec-hids/ossec-hids-2
 # url for OSSEC HERE
 if "url=" in autoinstall: 
     url = autoinstall.replace("url=", "").replace('"', "", 2)
-    version_name = url.split("/ossec-hids/")[1].replace(".tar.gz", "")
+    version_name = "ossec-hids-"+url.split("/archive/")[1].replace(".tar.gz", "")
 
 if "path=" in autoinstall:
     path = autoinstall.replace("path=", "").replace('"', "", 2)
@@ -254,6 +247,8 @@ def _pull_ossec_config(hostname):
  
 # install ossec once downloaded
 def _installossec(serverip,version_name):
+    cmds="apt update && apt install gcc make libevent-dev zlib1g-dev libssl-dev libpcre2-dev wget tar -y"
+    os.system(cmds)
     cwd = os.getcwd()
     os.chdir("/tmp/")
     subprocess.Popen("tar -zxvf ossec.tar.gz;rm ossec.tar.gz", shell=True).wait()
